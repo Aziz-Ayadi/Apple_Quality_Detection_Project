@@ -28,3 +28,6 @@ Clean the data up to make it ready for modeling process. I made the following ch
 
 ## EDA with Data Visualization (Matplotlib & Seaborn)
 I looked at the distributions of the data, calculated and visualized Pearson's correlation coefficient between all variables and explored the value counts for the target variable (which is the only categorical variable in the dataset) to extract insights and patterns that could be useful in the rest of the project. Below are some of the visualizations I made:<br><br><br>
+<img src="size_dist.png"><br>
+<img src="corr_mat.png"><br>
+<img src="quality_pie.png">

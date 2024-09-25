@@ -38,7 +38,7 @@ For anomaly detection, we only need genuine class of the data. So, we split up o
 * The decoder is typically a mirror image of the encoder, with one or more fully connected layers that transform the compressed representation back into the original input space. The output layer of the decoder should have the same number of nodes as the input layer, so that the decoder can produce a reconstruction of the input data. The activation function used in the decoder is typically the same as the one used in the encoder.<br>
 After building our model, we compiled it using Adam as an optimizer and mean-absolute-error as a loss function and trained it using only only genuine class of the training set.
 
-##Reconstruction & Classification
+## Reconstruction & Classification
 We will start by making a prediction on the test set which consists of both classes (genuine & abnormal). After this, we can define a threshold and a metric, depending upon the need. The idea is simple:
 
 * If the Reconstruction error is lower than the threshold, the sample is good.

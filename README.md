@@ -31,3 +31,22 @@ I looked at the distributions of the data, calculated and visualized Pearson's c
 <img src="size_dist.png"><br>
 <img src="corr_mat.png"><br>
 <img src="quality_pie.png">
+
+## Model Building
+For anomaly detection, we only need genuine class of the data. So, we split up our data into training and test sets with 20 % as a test size and divide genuine and abnormal classes in both training and test datasets. After that, we construct the autoencoder from scratch which is composed of two different parts (Encoder & Decoder) :
+* The encoder typically consists of one or more fully connected layers that transform the input data into a lower-dimensional representation. The number of nodes in the hidden layer is typically smaller than the number of nodes in the input and output layers, which forces the network to learn a compressed representation of the input data. The activation function used in the encoder can be any non-linear function, such as a sigmoid or a rectified linear unit (ReLU), which allows the network to capture non-linear relationships in the input data.
+* The decoder is typically a mirror image of the encoder, with one or more fully connected layers that transform the compressed representation back into the original input space. The output layer of the decoder should have the same number of nodes as the input layer, so that the decoder can produce a reconstruction of the input data. The activation function used in the decoder is typically the same as the one used in the encoder.<br>
+After building our model, we compiled it using Adam as an optimizer and mean-absolute-error as a loss function and trained it using only only genuine class of the training set.
+
+##Reconstruction & Classification
+We will start by making a prediction on the test set which consists of both classes (genuine & abnormal). After this, we can define a threshold and a metric, depending upon the need. The idea is simple:
+
+* If the Reconstruction error is lower than the threshold, the sample is good.
+* If the Reconstruction error is higher than the threshold, the sample is bad.<br>
+This is because the model was trained with samples of genuine class, so anything outside of this threshold is considered an anomaly.<br><br>Choosing the right threshold is crucial in anomaly detection with autoencoders because it determines the tradeoff between detecting anomalies and generating false positives. The threshold determines the cutoff point for the reconstruction error, above which a data point is classified as anomalous. If the threshold is set too low, the autoencoder will classify many normal data points as anomalies, resulting in a high false positive rate. On the other hand, if the threshold is set too high, the autoencoder may miss some true anomalies, resulting in a high false negative rate.<br><br>
+The metric we will choose for this problem is Recall, as we want to reduce False Negatives. Any Fraud apple classified as Genuine may lead to unnoticed problems in the stomach, since there will never be anomaly detected. To find the right threshold value, several values will be tested to find the best combination of metrics. While our goal is to improve Recall, we will also keep track of the accuracy. The tested values will be percentiles of the reconstruction error values.
+
+## Model Performance
+Our autoencoder hasn't performed very bad on test set as we get the following as final results:
+* <b>Recall score :</b> 34.73 %
+* <b>Recall score :</b> 54.5 %

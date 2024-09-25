@@ -49,4 +49,4 @@ The metric we will choose for this problem is Recall, as we want to reduce False
 ## Model Performance
 Our autoencoder hasn't performed very bad on test set as we get the following as final results:
 * <b>Recall score :</b> 34.73 %
-* <b>Recall score :</b> 54.5 %
+* <b>Accuracy score :</b> 54.5 %
